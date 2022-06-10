@@ -47,9 +47,7 @@ impl Transaction {
                 .map_err(|_| "invalid transaction ID")?,
             amount: columns
                 .next()
-                .unwrap_or("0")
-                .trim()
-                .parse::<f32>()
+                .map(|amount| amount.trim().parse::<f32>().unwrap_or(0.0))
                 .unwrap_or(0.0),
         };
 
